@@ -1,3 +1,4 @@
+#
 app = "grafana-fly-testing"
 primary_region = "ams"
 kill_signal = "SIGINT"
