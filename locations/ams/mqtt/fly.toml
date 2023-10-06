@@ -1,3 +1,4 @@
+#
 app = "nanomq-testing"
 primary_region = "ams"
 
