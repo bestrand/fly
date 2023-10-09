@@ -1,50 +1,48 @@
 # fly.toml app configuration file generated for publicdigdir on 2023-09-25T13:23:12+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-# #
-app = “publicdigdir”
+#
 
-primary_region = “ams”
-
-kill_signal = “SIGINT”
-kill_timeout = “5s”
+app = "publicdigdir"
+primary_region = "ams"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
 
 [experimental]
- auto_rollback = true
+  auto_rollback = true
 
 [build]
- image = “grafana/grafana:latest”
+  image = "grafana/grafana:latest"
 
 [env]
- GF_FEATURE_TOGGLES_ENABLE = “publicDashboards”
- GF_SERVER_ROOT_URL = “https://publicdigdir.fly.dev”
- port = “3000"
+  GF_FEATURE_TOGGLES_ENABLE = "publicDashboards"
+  GF_SERVER_ROOT_URL = "https://publicdigdir.fly.dev"
+  port = "3000"
 
 [[mounts]]
- source = “ha_machines”
- destination = “/var/lib/grafana”
- processes = [“app”]
+  source = "ha_machines"
+  destination = "/var/lib/grafana"
+  processes = ["app"]
 
 [[services]]
- protocol = “tcp”
- internal_port = 3000
- processes = [“app”]
+  protocol = "tcp"
+  internal_port = 3000
+  processes = ["app"]
 
- [[services.ports]]
-  port = 80
-  handlers = [“http”]
-  force_https = true
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
 
- [[services.ports]]
-  port = 443
-  handlers = [“tls”, “http”]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
 
- [services.concurrency]
-  type = “connections”
-  hard_limit = 25
-  soft_limit = 20
-
- [[services.tcp_checks]]
-  interval = “15s”
-  timeout = “2s”
-  grace_period = “1s”
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "1s"
