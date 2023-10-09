@@ -1,7 +1,7 @@
 # fly.toml app configuration file generated for publicdigdir on 2023-09-25T13:23:12+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
+# #
 app = “publicdigdir”
 
 primary_region = “ams”
