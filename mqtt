@@ -1,3 +1,6 @@
 apk add --no-cache mosquitto-clients
 mosquitto_pub -h host.docker.internal -p 1883 -t test -m hello
-mosquitto_sub -h host.docker.internal -p 1883 -t test
+mosquitto_sub -h host.docker.internal -p 1883 -t test | while read -r payload
+do
+    echo $payload | sh
+done
