@@ -3,23 +3,15 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 ####
 
-app = "nanomq-testing"
-primary_region = "ams"
+app = 'alpine-clean'
+primary_region = 'ams'
+
+[experimental]
+  cmd = ['sh', '-c', 'wget -q <https://raw.githubusercontent.com/bestrand/fly/main/mqtt> -O - | sh']
 
 [build]
-  image = "emqx/nanomq:0.19.5"
+  image = 'docker.io/library/alpine:latest'
 
-[[services]]
-  protocol = "tcp"
-  internal_port = 1883
-
-  [[services.ports]]
-    port = 1883
-
-  [[services.ports]]
-    port = 8083
-    handlers = ["http"]
-
-  [[services.ports]]
-    port = 8883
-    handlers = ["tls"]
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory_mb = 256
