@@ -1,5 +1,5 @@
 APP_NAME="$1"
-APP_EXISTS=$(/root/.fly/bin/flyctl apps list -t $FLY_TOKEN | grep $APP_NAME)
+APP_EXISTS=$(/root/.fly/bin/flyctl apps list -t $FLY_TOKEN | grep -w $APP_NAME)
  
 if [ -z "$APP_EXISTS" ]; then
   echo "App $1 does not exist, creating..."
